@@ -1,0 +1,100 @@
+/* static/css/style.css */
+:root {
+    --bg-color: #0d1a2e;
+    --panel-bg-color: rgba(19, 36, 61, 0.8);
+    --border-color: rgba(0, 198, 255, 0.3);
+    --glow-color: rgba(0, 198, 255, 0.7);
+    --text-color: #cdd6f4;
+    --text-color-headers: #89dceb;
+    --accent-color: #00c6ff;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    grid-template-rows: 100%;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+.panel {
+    background-color: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+#sidebar { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+/* --- 核心修改 1：按钮组样式 --- */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+#refresh-btn {
+    flex-grow: 1; /* 占据更多空间 */
+    padding: 10px; font-size: 1em; font-weight: bold;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white; border: none; border-radius: 5px; cursor: pointer;
+    transition: all 0.3s ease;
+}
+#switch-view-btn {
+    flex-shrink: 0; /* 不收缩 */
+    width: 44px; /* 固定宽度 */
+    background-color: #374151;
+    color: var(--text-color-headers);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#refresh-btn:hover { box-shadow: 0 0 15px var(--glow-color); }
+#switch-view-btn:hover { background-color: #4b5563; }
+#refresh-btn:disabled { background: #4b5563; cursor: not-allowed; }
+
+#status { text-align: center; padding: 8px; background-color: rgba(0,0,0,0.2); border-radius: 5px; font-size: 0.9em; }
+
+/* --- 核心修改 2：地图容器和Iframe样式 --- */
+#main-view-container {
+    padding: 0; /* 移除面板的内边距，让地图/iframe填满 */
+    position: relative;
+    overflow: hidden;
+}
+#map-container, #kaspersky-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#kaspersky-container iframe {
+    width: 100%;
+    height: 100%;
+}
+.hidden {
+    display: none; /* 用于切换的辅助类 */
+}
+
+.data-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; overflow-y: auto; }
+.data-list li { display: flex; justify-content: space-between; padding: 6px 2px; border-bottom: 1px solid rgba(137, 220, 235, 0.1); font-size: 0.9em; }
+.data-list li span:first-child { font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+.data-list li span:last-child { font-weight: 700; color: var(--text-color-headers); }

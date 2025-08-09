@@ -1,0 +1,47 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Fail2Ban 动态防御地图</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-grid">
+        <div id="sidebar">
+            <div class="panel" style="flex-grow: 0;">
+                <div class="button-group">
+                    <button id="refresh-btn">刷新数据</button>
+                    <button id="switch-view-btn" title="切换视图">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
+                            <path d="M13 11.586V7a1 1 0 0 0-2 0v4.586l-2.707-2.707a1 1 0 0 0-1.414 1.414L11.586 13l-4.707 4.707a1 1 0 0 0 1.414 1.414L13 14.414V19a1 1 0 0 0 2 0v-4.586l2.707 2.707a1 1 0 0 0 1.414-1.414L14.414 13l4.707-4.707a1 1 0 0 0-1.414-1.414L13 11.586z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="status">正在初始化...</div>
+            </div>
+            <div id="country-panel" class="panel" style="flex-grow: 1;">
+                <div class="panel-header">Top 10 攻击来源国</div>
+                <ul id="country-list" class="data-list"></ul>
+            </div>
+            <div id="asn-panel" class="panel" style="flex-grow: 1.2;">
+                 <div class="panel-header">Top 10 攻击来源机构 (ASN)</div>
+                 <ul id="asn-list" class="data-list"></ul>
+            </div>
+        </div>
+        <div id="main-view-container" class="panel">
+            <!-- 核心修改：直接给 map-container 添加 hidden 类 -->
+            <div id="map-container" class="hidden"></div>
+            <!-- 核心修改：直接移除 kaspersky-container 的 hidden 类 -->
+            <div id="kaspersky-container">
+                <iframe src="https://cybermap.kaspersky.com/cn/widget/dynamic/dark" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
