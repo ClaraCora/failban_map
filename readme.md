@@ -6,7 +6,6 @@
 
 一个基于 Python Flask 和 Plotly.js 构建的动态Web仪表盘，用于可视化分析 `fail2ban` 的日志文件。它能将来自全球的恶意扫描（特指SSH）以一个可交互的3D地球仪形式展现出来，并提供详细的数据分析面板。
 
-![效果图](https://i.imgur.com/8QfWj8p.png)
 
 ## ✨ 主要功能
 
